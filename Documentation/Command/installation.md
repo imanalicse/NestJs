@@ -10,3 +10,7 @@
 
 ### Format with prettier
 `npm run format`
+
+`npm i -D @nestjs/mapped-types`
+
+`npm i --save class-validator class-transformer`
