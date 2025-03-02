@@ -1,9 +1,11 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './modules/users/users.module';
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "./database/typeorm/entities/User";
+import {Module} from '@nestjs/common';
+import {AppController} from './app.controller';
+import {AppService} from './app.service';
+import {UsersModule} from './modules/users/users.module';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {User} from "./database/typeorm/entities/User";
+import {Order} from "./database/typeorm/entities/Order";
+import {OrdersModule} from './modules/orders/orders.module';
 
 
 @Module({
@@ -15,10 +17,11 @@ import { User } from "./database/typeorm/entities/User";
         username: 'root',
         password: '',
         database: 'nestjs',
-        entities: [User],
+        entities: [User, Order],
         synchronize: true,
     }),
-    UsersModule
+    UsersModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -8,13 +8,13 @@ import { Repository }  from "typeorm";
 
 @Injectable()
 export class UsersService {
+
     constructor(
-        @InjectRepository(User)
-        private userRepository: Repository<User>
+        @InjectRepository(User) private userRepository: Repository<User>
     ) {}
 
     findAll(role?: 'CUSTOMER' | 'ADMIN') {
-        return this.userRepository.find();
+        return this.userRepository.find({ relations: ['orders'] });
     }
 
     findOne(id: number) {
@@ -25,7 +25,7 @@ export class UsersService {
         return user
     }
 
-    create(createUserDto: CreateUserDto) {
+    createUser(createUserDto: CreateUserDto) {
         const newUser = this.userRepository.create({
             ...createUserDto,
             createdAt: new Date()
