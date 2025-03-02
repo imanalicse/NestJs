@@ -3,4 +3,8 @@
 
 `nest g controller users`
 
+`nest g controller users/controllers/users`
+
 `nest g service users`
+
+`nest g resource employees`
