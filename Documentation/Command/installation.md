@@ -14,3 +14,6 @@
 `npm i -D @nestjs/mapped-types`
 
 `npm i --save class-validator class-transformer`
+
+### configuration
+`npm i --save @nestjs/config`

@@ -5,12 +5,14 @@ import {Repository} from "typeorm";
 import {SignupDto} from "./dto/signup.dto";
 import * as bcrypt from "bcryptjs";
 import {LoginDto} from "./dto/login.dto";
+import { JwtService } from "@nestjs/jwt"
 
 @Injectable()
 export class AuthService {
 
     constructor(
-        @InjectRepository(User) private userRepository: Repository<User>
+        @InjectRepository(User) private userRepository: Repository<User>,
+        private jwtService: JwtService
     ) {}
 
     async signup(signupDto: SignupDto){
@@ -44,8 +46,14 @@ export class AuthService {
             throw new UnauthorizedException("Wrong credentials");
         }
 
+        return this.generateAccessToken(user)
+    }
+
+    async generateAccessToken(user) {
+        const payload = { sub: user.id, username: user.username };
+        const accessToken = this.jwtService.sign(payload)
         return {
-            message: "success"
-        }
+            accessToken
+        };
     }
 }
