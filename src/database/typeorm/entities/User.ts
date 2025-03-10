@@ -1,5 +1,6 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Order} from "./Order";
+import {RefreshToken} from "./RefreshToken";
 
 @Entity({name: 'users'})
 export class User {
@@ -23,4 +24,7 @@ export class User {
 
     @OneToMany(() => Order, (order) => order.user)
     orders: Order[];
+
+    @OneToOne(() => RefreshToken, (refreshToken) => refreshToken.user) // specify inverse side as a second parameter
+    refreshToken: RefreshToken
 }

@@ -9,6 +9,7 @@ import {OrdersModule} from './modules/orders/orders.module';
 import { AuthModule } from './auth/auth.module';
 import {JwtModule} from "@nestjs/jwt";
 import {ConfigModule, ConfigService} from "@nestjs/config";
+import {RefreshToken} from "./database/typeorm/entities/RefreshToken";
 
 
 @Module({
@@ -24,7 +25,7 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
         username: 'root',
         password: '',
         database: 'nestjs',
-        entities: [User, Order],
+        entities: [User, Order, RefreshToken],
         synchronize: true,
     }),
     JwtModule.register({
